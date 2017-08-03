@@ -17,15 +17,14 @@
 			<script src="https://use.fontawesome.com/a222ab71e2.js"></script>
 			<script src="js/three.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.8.0/d3.min.js"></script>
 			<script src="js/renderers/CSS3DRenderer.js"></script>
 			<script src="js/renderers/CanvasRenderer.js"></script>
-			<script src="js/renderers/Projector.js"></script>
-			<script src="js/controls/TrackballControls.js"></script>
+			<script src="js/controls/OrbitControls.js"></script>
 			<script src="js/Point3D.js"></script>
 			<script src="js/Series3D.js"></script>
 			<script src="js/Axis3D.js"></script>
 			<script src="js/ChartEngine.js"></script>
+			<script src="js/ScatterPlot.js"></script>
 
 		</head>
 		<style>
@@ -111,7 +110,56 @@
 		</style>
 	</head>
 	<body>
-		<div id='space'></div>
-		<script src="js/ScatterPlot.js"></script>
+		<div id='space' style="height:500px; width:500px"></div>
+		<script>
+			var options = {
+			  data: [{
+			    id: 'series_1',
+			    colour: 'white',
+			    data: [
+			      {id: 'hello', x: 0, y: 0, z: -3, colour: 'orange', options: {labels: {style: {color: 'orange'}}}},
+			      {id: 'world', x: 0, y: 0, z: 0},
+			      {id: 'domo', x: 0, y: 0, z: 3},
+			      {id: 'test', x: -3, y: 0, z: 0},
+			      {id: 'nice', x: 3, y: 0, z: 0},
+			      {id: 'marker', x: 0, y: 3, z: 0},
+			      {id: 'last', x: 0, y: -3, z: 0}
+			    ],
+			    options: {
+			      points: {
+			        axisNames: {
+			          x: 'Q',
+			          y: 'V',
+			          z: 'T'
+			        },
+			        labels: {
+			          enabled: true,
+			          style: {colour: 'white'}
+			        },
+			        points: {
+			          enabled: true
+			        },
+			        selection: {
+			          enabled: true
+			        },
+			        tooltip: {
+			          enabled: true
+			        }
+			      }
+			    }
+			  }],
+			  chart: {
+			    axes: {
+			      colour: 0x666666,
+			      labels: {
+			        enabled: true
+			      },
+			      align: 'center'
+			    }
+			  }
+			};
+
+			var sp = new ScatterPlot('space', options, 1000, 1000, 1000);
+		</script>
 	</body>
 </html>

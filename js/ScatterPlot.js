@@ -37,7 +37,7 @@ function ScatterPlot(container, options, height, width, depth){
   console.log(this.container[0]);
 
   this.camera = new THREE.PerspectiveCamera(75, this.container.innerWidth() / this.container.innerHeight(), 1, 10000);
-  this.camera.position.set(height/2, width/2, depth*2);
+  this.camera.position.set(0, 0, depth*1.25);
   this.camera.lookAt(new THREE.Vector3(0,0,0));
 
   this.chart = new ChartEngine(this.pointScene, this.tickScene, this.axisScene,
@@ -45,7 +45,7 @@ function ScatterPlot(container, options, height, width, depth){
   this.chart.addScene();
 
   this.threeRenderer = new THREE.WebGLRenderer();
-  this.threeRenderer.setClearColor(0x26282f)
+  this.threeRenderer.setClearColor(this.container.css("background-color"))
 	this.threeRenderer.setPixelRatio(window.devicePixelRatio);
 	this.threeRenderer.setSize(this.container.innerWidth(), this.container.innerHeight());
   document.getElementById(container).appendChild(this.threeRenderer.domElement);
@@ -56,8 +56,8 @@ function ScatterPlot(container, options, height, width, depth){
   this.cssRenderer.domElement.style.top = 0;
   document.getElementById(container).appendChild(this.cssRenderer.domElement);
 
-  this.controls = new THREE.TrackballControls(this.camera, this.cssRenderer.domElement);
-  this.controls.rotateSpeed = 1;
+  this.controls = new THREE.OrbitControls(this.camera, this.cssRenderer.domElement);
+  this.controls.rotateSpeed = 0.5;
 
   this.container.data({ScatterPlot: this});
 
@@ -69,6 +69,8 @@ function ScatterPlot(container, options, height, width, depth){
     that.cssRenderer.setSize(that.container.innerWidth(), that.container.innerHeight());
 
   }, false);
+
+  this.animate()
 };
 
 /*--animate()----------------------------------------------
@@ -134,57 +136,6 @@ ScatterPlot.prototype.updatePoints = function(data, animate){
     }
   };
 };
-
-var options = {
-  data: [{
-    id: 'series_1',
-    colour: undefined,
-    data: [
-      {id: 'hello', x: 0, y: 0, z: -3, colour: 'orange', options: {labels: {style: {color: 'orange'}}}},
-      {id: 'world', x: 0, y: 0, z: 0},
-      {id: 'domo', x: 0, y: 0, z: 3},
-      {id: 'test', x: -3, y: 0, z: 0},
-      {id: 'nice', x: 3, y: 0, z: 0},
-      {id: 'marker', x: 0, y: 3, z: 0},
-      {id: 'last', x: 0, y: -3, z: 0}
-    ],
-    options: {
-      points: {
-        axisNames: {
-          x: 'Q',
-          y: 'V',
-          z: 'T'
-        },
-        labels: {
-          enabled: true,
-          style: {color: 'white'}
-        },
-        points: {
-          enabled: true
-        },
-        selection: {
-          enabled: true
-        },
-        tooltip: {
-          enabled: true
-        }
-      }
-    }
-  }],
-  chart: {
-    axes: {
-      colour: 0x666666,
-      labels: {
-        enabled: true
-      },
-      align: 'center'
-    }
-  }
-};
-
-var sp = new ScatterPlot('space', options, 1000, 1000, 1000);
-
-sp.animate();
 
 /*--Event Handlers for the Control Panel-----------------*/
 $(document).ready(function(){

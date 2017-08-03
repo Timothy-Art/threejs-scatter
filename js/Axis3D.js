@@ -174,6 +174,7 @@ Axis3D.prototype.genAxis = function(){
       var ele = $('<div>'+this.ticks.x[i]+'</div>');
       ele.css({
         "color": this.options.labels.colour,
+        "font-family": "Open-sans, sans-serif",
         "position": 'absolute',
         "display": 'inline',
         "text-align": 'center'
@@ -222,6 +223,7 @@ Axis3D.prototype.genAxis = function(){
       var ele = $('<div>'+this.ticks.y[i]+'</div>');
       ele.css({
         "color": this.options.labels.colour,
+        "font-family": "Open-sans, sans-serif",
         "position": 'absolute',
         "display": 'inline',
         "text-align": 'center'
@@ -268,6 +270,7 @@ Axis3D.prototype.genAxis = function(){
       var ele = $('<span>'+this.ticks.z[i]+'</span>');
       ele.css({
         "color": this.options.labels.colour,
+        "font-family": "Open-sans, sans-serif",
         "position": 'absolute',
         "display": 'inline',
         "text-align": 'center'
