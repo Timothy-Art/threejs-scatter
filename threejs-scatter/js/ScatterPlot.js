@@ -52,8 +52,8 @@ function ScatterPlot(container, options, height, width, depth){
 
   this.cssRenderer = new THREE.CSS3DRenderer();
   this.cssRenderer.setSize(this.container.innerWidth(), this.container.innerHeight());
-  this.cssRenderer.domElement.style.position = 'absolute';
-  this.cssRenderer.domElement.style.top = 0;
+  this.cssRenderer.domElement.style.position = 'relative';
+  this.cssRenderer.domElement.style.top = '-100%';
   document.getElementById(container).appendChild(this.cssRenderer.domElement);
 
   this.controls = new THREE.OrbitControls(this.camera, this.cssRenderer.domElement);
