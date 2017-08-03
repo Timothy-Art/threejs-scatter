@@ -1,0 +1,16 @@
+dependencies:
+  - name: threejsScatter
+    version: 0.1.0
+    src: htmlwidgets/lib/threejs-scatter
+    script:
+      - three.js
+      - CanvasRenderer.js
+      - CSS3DRenderer.js
+      - OrbitControls.js
+      - Point3D.js
+      - Series3D.js
+      - ChartEngine.js
+      - Axis3D.js
+      - ScatterPlot.js
+    stylesheet:
+      - default.css
