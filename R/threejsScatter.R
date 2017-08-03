@@ -14,7 +14,7 @@
 threejsScatter <- function(data, dimX, dimY, dimZ, width = NULL, height = NULL, elementId = NULL) {
   require(rjson)
   
-  data <- rjson::toJSON(opts)
+  data <- rjson::toJSON(data)
 
   x <- list(
     data = data,
