@@ -4,6 +4,7 @@ dependencies:
     src: htmlwidgets/lib/threejs-scatter
     script:
       - three.js
+      - tween.js
       - CanvasRenderer.js
       - CSS3DRenderer.js
       - OrbitControls.js

@@ -13,6 +13,10 @@ HTMLWidgets.widget({
     return {
       renderValue: function(x){
 
+        if (!initialized){
+          $('#'+ele.id).css({background : x.bg})
+        }
+
         var options = JSON.parse(x.data)
         var sp = new ScatterPlot(elementId, options, x.height, x.width, x.depth)
 

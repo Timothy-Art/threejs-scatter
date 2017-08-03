@@ -4,7 +4,7 @@
 \alias{threejsScatterOutput}
 \title{Shiny output bindings for a threejsScatter}
 \usage{
-threejsScatterOutput(outputId, width = "100\%", height = "500px")
+threejsScatterOutput(outputId, width = "100\%", height = "800px")
 }
 \arguments{
 \item{outputId}{output id of the widget}

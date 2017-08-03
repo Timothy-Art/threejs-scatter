@@ -4,13 +4,15 @@
 \alias{threejsScatter}
 \title{threejsScatter}
 \usage{
-threejsScatter(data, dimX, dimY, dimZ, width = NULL, height = NULL,
-  elementId = NULL)
+threejsScatter(data, dimX = 1000, dimY = 1000, dimZ = 1000,
+  background = "black", width = NULL, height = NULL, elementId = NULL)
 }
 \arguments{
 \item{data}{a list of options and data points to pass to the scatter plot}
 
 \item{dimX, dimY, dimZ}{how long you want the x, y, and z dimensions of the graph}
+
+\item{background}{colour to make the background of the chart}
 }
 \value{
 html widget

@@ -6,7 +6,7 @@ ui <- fluidPage(
   tags$head(
     tags$script(src="https://use.fontawesome.com/a222ab71e2.js")
   ),
-  threejsScatterOutput('test')
+  threejsScatterOutput('test', height = '1200')
 )
 
 # Define server logic required to draw a histogram
@@ -36,11 +36,11 @@ server <- function(input, output, session) {
           )
         )
       )
-      
+
     ),
     chart = list(
       axes = list(
-        color = '000000',
+        colour = 0x12acff,
         labels = list(enabled = TRUE),
         align = 'center'
       )
@@ -48,7 +48,7 @@ server <- function(input, output, session) {
   )
 
   output$test <- renderThreejsScatter(
-    threejsScatter(data = opts, dimX = 1000, dimY = 1000, dimZ = 1000)
+    threejsScatter(data = opts, dimX = 1500, dimY = 1500, dimZ = 1500, background = '#26282f')
   )
 
 }
