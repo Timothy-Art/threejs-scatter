@@ -12,7 +12,7 @@ If you wish to use the javascript library, the source along with an example is l
 
 *full docs coming soon*
 
-## Use with Shiny
+## Usage
 
 The R package contains functions that allow you to add a 3D scatter plot to your shiny applications and dashboards.
 
@@ -23,3 +23,7 @@ The `threejsScatter(data, dimX, dimY, dimZ, background)` function creates and pl
 `dimX, dimY, dimZ` are numbers specifying the size of the virtual space for the chart to live in. By default these are 1000, resulting in a large cube for the chart. By reducing or increasing the size, you will stretch or shrink the available space but the elements of the chart will remain the same sizes. So for very busy charts, you can increase the dimension sizes and the elements will appear to be more sparsely placed (although their relationship to one another will remain constant).
 
 `background` a valid css unit to specify the colour you want the background of the chart to be.
+
+## Shiny Dashboard
+
+To use the widget with shiny, there is a `threejsScatterOutput` and corresponding `renderThreejsScatter` function.
