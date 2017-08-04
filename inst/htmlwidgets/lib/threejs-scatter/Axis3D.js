@@ -9,7 +9,6 @@ Parameters:
 Properties:
   max...............(Number) Maximum value of axis.
   min...............(Number) Minimum value of axis.
-  type..............(String) 'x', 'y', or 'z' axis type.
   scaleX............(Number) Scaling on the x axis.
   scaleY............(Number) Scaling on the y axis.
   ticks.............(Array<Number>) Ticks along the axis.
@@ -58,6 +57,10 @@ function Axis3D(minX, maxX, minY, maxY, minZ, maxZ,
   this.options = jQuery.extend(true, defaults, options);
 
   this.actors = {axes: [], ticks: []}
+
+  this.ticks.x = this.genTicks(this.minX, this.maxX);
+  this.ticks.y = this.genTicks(this.minY, this.maxY);
+  this.ticks.z = this.genTicks(this.minZ, this.maxZ);
 };
 
 /*--findZeros(x)-------------------------------------------
@@ -141,10 +144,6 @@ Axis3D.prototype.genTicks = function(min, max){
 Generates the full 3D axis object
 ---------------------------------------------------------*/
 Axis3D.prototype.genAxis = function(){
-  // Creating the tick marks
-  this.ticks.x = this.genTicks(this.minX, this.maxX);
-  this.ticks.y = this.genTicks(this.minY, this.maxY);
-  this.ticks.z = this.genTicks(this.minZ, this.maxZ);
 
   //--Creating the plane geometry for X-Z axis-------------
   var tick,

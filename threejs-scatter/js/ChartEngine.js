@@ -77,10 +77,24 @@ function ChartEngine(pointScene, tickScene, axisScene, data, options, height, wi
     this.minZ = this.series[i].minZ < this.minZ ? this.series[i].minZ : this.minZ;
   };
 
+  this.axes = new Axis3D(this.minX, this.maxX, this.minY, this.maxY, this.minZ, this.maxZ,
+    this.scaleX, this.scaleY, this.scaleZ, this.options.axes);
+
+  this.maxX = this.maxX > this.axes.ticks.x[this.axes.ticks.x.length-1] ? this.maxX : this.axes.ticks.x[this.axes.ticks.x.length-1]
+  this.minX = this.minX < this.axes.ticks.x[0] ? this.minX : this.axes.ticks.x[0]
+  this.maxY = this.maxY > this.axes.ticks.y[this.axes.ticks.y.length-1] ? this.maxY : this.axes.ticks.y[this.axes.ticks.y.length-1]
+  this.minY = this.minY < this.axes.ticks.y[0] ? this.minY : this.axes.ticks.y[0]
+  this.maxZ = this.maxZ > this.axes.ticks.z[this.axes.ticks.z.length-1] ? this.maxZ : this.axes.ticks.z[this.axes.ticks.z.length-1]
+  this.minZ = this.minZ < this.axes.ticks.z[0] ? this.minZ : this.axes.ticks.z[0]
+
   // Figuring out the scaling of the points.
   this.scaleX = this.width / ((this.maxX - this.minX) || 1);
   this.scaleY = this.height / ((this.maxY - this.minY) || 1);
   this.scaleZ = this.depth / ((this.maxZ - this.minZ) || 1);
+
+  this.axes.scaleX = this.scaleX
+  this.axes.scaleY = this.scaleY
+  this.axes.scaleZ = this.scaleZ
 
   // Setting the real coordinates of the points.
   for (i in this.series){
@@ -91,9 +105,9 @@ function ChartEngine(pointScene, tickScene, axisScene, data, options, height, wi
     };
   };
 
-  this.axes = new Axis3D(this.minX, this.maxX, this.minY, this.maxY, this.minZ, this.maxZ,
-    this.scaleX, this.scaleY, this.scaleZ, this.options.axes);
   this.axes.genAxis();
+
+
 };
 
 /*--reScale(height, width, depth, animate)-----------------
