@@ -7,7 +7,7 @@ HTMLWidgets.widget({
   factory: function(ele, width, height){
 
     var elementId = ele.id;
-    var sp;
+    var sp = new ScatterPlot(elementId);
     var initialized = false;
 
     return {
@@ -18,7 +18,9 @@ HTMLWidgets.widget({
         }
 
         var options = JSON.parse(x.data)
-        var sp = new ScatterPlot(elementId, options, x.height, x.width, x.depth)
+        sp.setDim(x.height, x.width, x.depth)
+        sp.setOptions(options)
+        sp.initialize()
 
         if (!initialized){
           initialized = true;

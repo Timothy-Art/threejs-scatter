@@ -80,7 +80,10 @@
 			  }
 			};
 
-			var sp = new ScatterPlot('space', options, 1000, 1000, 1000);
+			var sp = new ScatterPlot('space');
+			sp.setDim(1000, 1000, 1000)
+			sp.setOptions(options);
+			sp.initialize()
 		</script>
 	</body>
 </html>

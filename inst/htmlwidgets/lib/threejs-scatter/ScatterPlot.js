@@ -2,8 +2,6 @@
 A class that builds and contains the elements of the 3D chart.
 Parameters:
   container.........(String) id of HTML container.
-  options...........(Object) Options containing series and
-                    chart settings.
 Properties:
   options...........(Object) Stored options.
   container.........(JQuery) containing element.
@@ -15,29 +13,61 @@ Properties:
 Functions:
   animate()
 ---------------------------------------------------------*/
-function ScatterPlot(container, options, height, width, depth){
-  var that = this;
-
+function ScatterPlot(container){
   this.camera,
   this.pointScene, this.tickScene, this.axisScene,
   this.cssRenderer, this.threeRenderer;
   this.controls;
   this.chart;
+  this.height, this.width, this.depth;
+  this.animating = false;
 
+  this.container  = $('#'+container);
+  //console.log(this.pointScene);
+  console.log(this.container[0]);
+};
+
+/*--setDim()-----------------------------------------------
+Sets the dimensions
+height, width, depth...(Number)
+---------------------------------------------------------*/
+ScatterPlot.prototype.setDim = function(height, width, depth){
   this.height = height,
   this.width  = width,
   this.depth  = depth;
+}
 
-  this.container  = $('#'+container);
-  this.options    = options;
+/*--setOptions()-------------------------------------------
+Sets the options property
+options...........(Object) Options containing series and
+                  chart settings.
+---------------------------------------------------------*/
+ScatterPlot.prototype.setOptions = function(options){
+  this.options = options;
+}
+
+/*--initialize()-------------------------------------------
+Initializes variables given the options and starts the chart.
+---------------------------------------------------------*/
+ScatterPlot.prototype.initialize = function(){
+  if (this.animating){
+    this.animating = false;
+    this.pointScene = null;
+    this.tickScene = null;
+    this.axisScene = null;
+    this.threeRenderer = null;
+    this.cssRenderer = null;
+    this.camera = null;
+    this.controls = null;
+    this.container.empty();
+  }
+
   this.pointScene = new THREE.Scene();
   this.tickScene  = new THREE.Scene();
   this.axisScene  = new THREE.Scene();
-  //console.log(this.pointScene);
-  console.log(this.container[0]);
 
   this.camera = new THREE.PerspectiveCamera(75, this.container.innerWidth() / this.container.innerHeight(), 1, 10000);
-  this.camera.position.set(0, 0, depth*1.25);
+  this.camera.position.set(0, 0, this.depth*1.25);
   this.camera.lookAt(new THREE.Vector3(0,0,0));
 
   this.chart = new ChartEngine(this.pointScene, this.tickScene, this.axisScene,
@@ -46,15 +76,15 @@ function ScatterPlot(container, options, height, width, depth){
 
   this.threeRenderer = new THREE.WebGLRenderer();
   this.threeRenderer.setClearColor(this.container.css("background-color"))
-	this.threeRenderer.setPixelRatio(window.devicePixelRatio);
-	this.threeRenderer.setSize(this.container.innerWidth(), this.container.innerHeight());
-  document.getElementById(container).appendChild(this.threeRenderer.domElement);
+  this.threeRenderer.setPixelRatio(window.devicePixelRatio);
+  this.threeRenderer.setSize(this.container.innerWidth(), this.container.innerHeight());
+  document.getElementById(this.container[0].id).appendChild(this.threeRenderer.domElement);
 
   this.cssRenderer = new THREE.CSS3DRenderer();
   this.cssRenderer.setSize(this.container.innerWidth(), this.container.innerHeight());
   this.cssRenderer.domElement.style.position = 'relative';
   this.cssRenderer.domElement.style.top = '-100%';
-  document.getElementById(container).appendChild(this.cssRenderer.domElement);
+  document.getElementById(this.container[0].id).appendChild(this.cssRenderer.domElement);
 
   this.controls = new THREE.OrbitControls(this.camera, this.cssRenderer.domElement);
   this.controls.rotateSpeed = 0.5;
@@ -70,14 +100,17 @@ function ScatterPlot(container, options, height, width, depth){
 
   }, false);
 
+  this.animating = true;
   this.animate()
-};
+}
 
 /*--animate()----------------------------------------------
 Draws and animates the scene.
 ---------------------------------------------------------*/
 ScatterPlot.prototype.animate = function(){
-  requestAnimationFrame(this.animate.bind(this));
+  if(this.animating){
+    requestAnimationFrame(this.animate.bind(this));
+  }
 
   TWEEN.update();
   this.controls.update();
